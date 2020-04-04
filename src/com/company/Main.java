@@ -14,13 +14,14 @@ public class Main {
 
     public static void main(String[] args) {
         //part 1 my Linked List and collection benchmark;
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedList<Integer> list = new MyLinkedList();
         list.add(213);
         list.add(11);
         list.add(12123);
         list.set(2,777);
         list.remove(1);
         System.out.println(list);
+
         System.out.println("=== my Linked List test ===");
         //ex 1 MyLinkedList vs java.util.LinkedList
         System.out.println("-- ex 1 --");
