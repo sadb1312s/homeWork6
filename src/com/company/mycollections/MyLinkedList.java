@@ -1,9 +1,7 @@
 package com.company.mycollections;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 public class MyLinkedList<E> implements ILinkedList<E>{
 
@@ -55,8 +53,18 @@ public class MyLinkedList<E> implements ILinkedList<E>{
 
     @Override
     public void clear() {
+
+        for (Element<E> x = first; x != null; ) {
+            Element<E> next = x.next;
+            x.value = null;
+            x.next = null;
+            x.prev = null;
+            x = next;
+        }
+
         first = last = null;
         size = 0;
+
     }
 
     @Override
@@ -137,6 +145,10 @@ public class MyLinkedList<E> implements ILinkedList<E>{
 
     @Override
     public E[] toArray() {
+        if(first == null){
+            return null;
+        }
+
         E[] array =  (E[]) Array.newInstance(first.value.getClass(),size);
 
         int index = 0;

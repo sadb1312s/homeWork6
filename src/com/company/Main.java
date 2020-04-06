@@ -13,13 +13,17 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        //part 1 my Linked List and collection benchmark;
+        /*//part 1 my Linked List and collection benchmark;
         MyLinkedList<Integer> list = new MyLinkedList<>();
         list.add(213);
         list.add(11);
         list.add(12123);
         list.set(2,777);
         list.remove(1);
+        list.add(1);
+        list.add(2);
+
+        list.clear();
         System.out.println(list);
 
         System.out.println("=== my Linked List test ===");
@@ -86,9 +90,9 @@ public class Main {
         //part 3 stream exercises;
         System.out.println("stream exercises");
         //ex 7
-        System.out.println("--- ex 7 ---");
+        System.out.println("--- ex 7 ---");*/
         StreamUtils streamUtils = new StreamUtils("F:/NetCracker/homeWork6/voyna-i-mir-tom-1.txt");
-        streamUtils.readFile();
+        /*streamUtils.readFile();
         System.out.println();
 
         //ex 8
@@ -125,7 +129,7 @@ public class Main {
         System.out.println();
         System.out.println("--- ex 16 ---");
         streamUtils.getPrime();
-        System.out.println();
+        System.out.println();*/
 
 
         //ex 17

@@ -264,7 +264,7 @@ public class StreamUtils {
     //Find the 500 longest strings in War and Peace with a parallel stream. Is it
     //any faster than using a serial stream?
 
-    //what is longest string? more part of strings in book have equal lengths
+    //what is longest string? more part of strings in book have equal lengths     -> strings are words!!!!!!!
     public void getLongestString(){
 
         try {
@@ -275,7 +275,7 @@ public class StreamUtils {
             s1 = System.nanoTime();
             Stream<String> stringStream = Stream.generate(()->{
                 if(scanner.hasNextLine()){
-                return scanner.nextLine();
+                    return scanner.nextLine();
                 }else {
                     return null;
                 }
@@ -298,9 +298,6 @@ public class StreamUtils {
             System.out.println("Serial stream time "+((f-s1)/1_000_000)+" ms");
 
             System.out.println("equal");
-
-
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
