@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         //part 1 my Linked List and collection benchmark;
-        MyLinkedList<Integer> list = new MyLinkedList();
+        MyLinkedList<Integer> list = new MyLinkedList<>();
         list.add(213);
         list.add(11);
         list.add(12123);
@@ -43,7 +43,7 @@ public class Main {
 
         //ex5
         System.out.println("--- ex 5 ---");
-        List<Integer> list1 = new ArrayList();
+        List<Integer> list1 = new ArrayList<>();
         list1.add(1);
         list1.add(2);
         list1.add(3);
@@ -145,7 +145,7 @@ public class Main {
 
     public static void myCollectionBenchmark(){
         System.out.println("== MY LIST BENCHMARK ==");
-        LinkedList<Integer> linkedList = new LinkedList();
+        LinkedList<Integer> linkedList = new LinkedList<>();
         MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
         DataSet dataSet = new DataSet(1_000_000);
 
@@ -175,8 +175,8 @@ public class Main {
         System.out.println("== SET BENCHMARK ==");
         DataSet dataSet2 = new DataSet(10_000_000);
 
-        HashSet<Integer> set1 = new HashSet();
-        LinkedHashSet<Integer> set2 = new LinkedHashSet();
+        HashSet<Integer> set1 = new HashSet<>();
+        LinkedHashSet<Integer> set2 = new LinkedHashSet<>();
         TreeSet<Integer> set3 = new TreeSet<>();
 
         SetBenchmark setBenchmark = new SetBenchmark(set1,set2,set3,dataSet2);
@@ -189,9 +189,9 @@ public class Main {
         DataSet dataSet3 = new DataSet(10_000_000);
 
 
-        HashMap<Integer,Object> map = new HashMap();
-        LinkedHashMap<Integer,Object> map2 = new LinkedHashMap();
-        TreeMap<Integer,Object> map3 = new TreeMap();
+        HashMap<Integer,Object> map = new HashMap<>();
+        LinkedHashMap<Integer,Object> map2 = new LinkedHashMap<>();
+        TreeMap<Integer,Object> map3 = new TreeMap<>();
 
         MapBenchmark mapBenchmark = new MapBenchmark(map,map2,map3,dataSet3);
         mapBenchmark.addTest();
