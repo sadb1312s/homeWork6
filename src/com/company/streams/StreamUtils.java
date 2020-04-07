@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 import java.math.BigInteger;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -264,7 +266,7 @@ public class StreamUtils {
     //Find the 500 longest strings in War and Peace with a parallel stream. Is it
     //any faster than using a serial stream?
 
-    //what is longest string? more part of strings in book have equal lengths     -> strings are words!!!!!!!
+    //what is longest string? more part of strings in book have equal lengths     -> strings are words!
     public void getLongestString(){
 
         try {
@@ -272,30 +274,43 @@ public class StreamUtils {
 
             long s1,f;
 
-            s1 = System.nanoTime();
-            Stream<String> stringStream = Stream.generate(()->{
-                if(scanner.hasNextLine()){
-                    return scanner.nextLine();
-                }else {
-                    return null;
-                }
-            }).parallel().takeWhile(s -> s != null).sorted(Comparator.comparing(String::length).reversed());
-            stringStream = stringStream.limit(500);
+            //good
+
+            /*Stream<String> stringStream = scanner.tokens().sorted(Comparator.comparing(String::length).reversed());
             f = System.nanoTime();
+
+            Map<Integer,Set<String>> map = stringStream.collect(Collectors.groupingBy(s -> s.length(),Collectors.toSet()));
+            map.forEach((o, o2) -> System.out.println("length = "+o+" word count = "+o2.size()+" words = "+o2));*/
+
+            Stream<String> startStream = scanner.tokens();
+            List<String> strings = startStream.map(s -> s.replaceAll("[\\p{Punct}&&[^_-]]+","")).collect(Collectors.toList());
+
+
+            s1 = System.nanoTime();
+
+            Stream<String> stringStream = strings.parallelStream().sorted(Comparator.comparing(String::length).reversed()).limit(500);
+
+            Map<Integer,Set<String>> map = stringStream.collect(Collectors.groupingBy(s -> s.length(),Collectors.toSet()));
+
+            f = System.nanoTime();
+
             System.out.println("Parallel stream time "+((f-s1)/1_000_000)+" ms");
 
+            map.forEach((o, o2) ->{ System.out.println("length = "+o+" word count = "+o2.size()+" words = "+o2);});
+
 
             s1 = System.nanoTime();
-            Stream<String> stringStream2 = Stream.generate(()->{
-                if(scanner.hasNextLine()){
-                    return scanner.nextLine();
-                }else {
-                    return null;
-                }
-            }).takeWhile(s -> s != null).sorted(Comparator.comparing(String::length).reversed());
-            stringStream2 = stringStream2.limit(500);
+
+
+            Stream<String> stringStream2 = strings.stream().sorted(Comparator.comparing(String::length).reversed()).limit(500);
+
+            Map<Integer,Set<String>> map2 = stringStream2.collect(Collectors.groupingBy(s -> s.length(),Collectors.toSet()));
+
             f = System.nanoTime();
-            System.out.println("Serial stream time "+((f-s1)/1_000_000)+" ms");
+            System.out.println(" stream time "+((f-s1)/1_000_000)+" ms");
+
+
+            map2.forEach((o, o2) ->{ System.out.println("length = "+o+" word count = "+o2.size()+" words = "+o2);});
 
             System.out.println("equal");
 

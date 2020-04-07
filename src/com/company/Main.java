@@ -13,7 +13,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        /*//part 1 my Linked List and collection benchmark;
+        //part 1 my Linked List and collection benchmark;
         MyLinkedList<Integer> list = new MyLinkedList<>();
         list.add(213);
         list.add(11);
@@ -87,13 +87,17 @@ public class Main {
         Dijkstra ways = new Dijkstra();
         System.out.println();
 
+
         //part 3 stream exercises;
         System.out.println("stream exercises");
-        //ex 7
-        System.out.println("--- ex 7 ---");*/
+
         StreamUtils streamUtils = new StreamUtils("F:/NetCracker/homeWork6/voyna-i-mir-tom-1.txt");
-        /*streamUtils.readFile();
+        //ex 7
+        System.out.println("--- ex 7 ---");
+
+        streamUtils.readFile();
         System.out.println();
+
 
         //ex 8
         System.out.println();
@@ -129,13 +133,16 @@ public class Main {
         System.out.println();
         System.out.println("--- ex 16 ---");
         streamUtils.getPrime();
-        System.out.println();*/
+        System.out.println();
+
 
 
         //ex 17
         System.out.println("--- ex 17 ---");
         streamUtils.getLongestString();
         System.out.println();
+
+
     }
 
 
