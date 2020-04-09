@@ -12,6 +12,7 @@ public class ListBenchmark {
     private Long finish;
 
     public ListBenchmark(List collection1, List collection2, DataSet data) {
+
         this.collection1 = collection1;
         this.collection2 = collection2;
         this.dataSet = data.getDataSet();
