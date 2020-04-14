@@ -124,11 +124,11 @@ public class Dijkstra {
     }
 
 
-    private class Neighbor{
-        private int distance;
-        private City city;
+    private static class Neighbor{
+        int distance;
+        City city;
 
-        public Neighbor(City city, int distance) {
+        Neighbor(City city, int distance) {
             this.distance = distance;
             this.city = city;
         }
@@ -139,18 +139,18 @@ public class Dijkstra {
         }
     }
 
-    private class City{
-        private Double weight = Double.POSITIVE_INFINITY;//min distance to this city
-        private boolean isVisited;
-        private String name;
-        private List<Neighbor> neighbors;
+    private static class City{
+        Double weight = Double.POSITIVE_INFINITY;//min distance to this city
+        boolean isVisited;
+        String name;
+        List<Neighbor> neighbors;
 
-        private City(String name) {
+        City(String name) {
             this.name = name;
-            neighbors = new ArrayList();
+            neighbors = new ArrayList<>();
         }
 
-        private void addNeighbors(City city,int dist){
+        void addNeighbors(City city,int dist){
             neighbors.add(new Neighbor(city,dist));
         }
 

@@ -12,11 +12,11 @@ public class MyLinkedList<E> implements ILinkedList<E>{
     @Override
     public void add(E element) {
         if(size != 0){
-            Element<E> newLast = new Element<>(element,null,last);
+            Element<E> newLast = new Element<>(element, null, last);
             last.next = newLast;
             last = newLast;
         }else {
-            first = new Element<>(element,null,null);
+            first = new Element<>(element, null, null);
             last = first;
         }
         size++;
@@ -29,7 +29,7 @@ public class MyLinkedList<E> implements ILinkedList<E>{
         }else {
             if (checkRange(index)){
                 Element<E> current = getNode(index);
-                Element<E> newC = new Element<>(element,current,current.prev);
+                Element<E> newC = new Element<>(element, current, current.prev);
 
                 if(current == first){
                     newC.next = current;
@@ -47,7 +47,7 @@ public class MyLinkedList<E> implements ILinkedList<E>{
         if(index >= 0 && index < size){
             return true;
         }else {
-            throw new IndexOutOfBoundsException(index);
+            throw new IndexOutOfBoundsException("index = "+index+" size = "+size);
         }
     }
 
@@ -132,8 +132,7 @@ public class MyLinkedList<E> implements ILinkedList<E>{
     @Override
     public E set(int index, E element) {
         if(checkRange(index)){
-            E value = getNode(index).value = element;
-            return value;
+            return getNode(index).value = element;
         }
         return null;
     }
@@ -169,12 +168,12 @@ public class MyLinkedList<E> implements ILinkedList<E>{
         return str;
     }
 
-    private class Element<E> {
-        public E value;
-        public Element<E> next;
-        public Element<E> prev;
+    private static class Element<E> {
+        E value;
+        Element<E> next;
+        Element<E> prev;
 
-        public Element(E current, Element<E> next, Element<E> prev) {
+        Element(E current, Element<E> next, Element<E> prev) {
             this.value = current;
             this.next = next;
             this.prev = prev;
@@ -206,7 +205,7 @@ public class MyLinkedList<E> implements ILinkedList<E>{
     }
 
     private class MyIterator implements Iterator{
-        private Element cursor = first;
+        Element cursor = first;
 
         @Override
         public boolean hasNext() {

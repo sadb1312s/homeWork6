@@ -1,10 +1,6 @@
 package com.company.algorithms;
 
-import com.company.mycollections.benchmarks.MapBenchmark;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //ex 1 from book

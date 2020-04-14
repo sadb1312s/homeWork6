@@ -1,117 +1,46 @@
 package com.company.mycollections.benchmarks;
 
 import com.company.mycollections.MyLinkedList;
-
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-public class MyListBenchmark {
+public class MyListBenchmark extends Benchmark{
     private List linkedList;
     private MyLinkedList myLinkedList;
-    private int[] dataSet;
-    private int[] indexes;
-    private Long start;
-    private Long finish;
 
     public MyListBenchmark(List linkedList, MyLinkedList myLinkedList, DataSet dataSet) {
+        super(dataSet);
         this.linkedList = linkedList;
         this.myLinkedList = myLinkedList;
-        this.dataSet = dataSet.getDataSet();
-        this.indexes = dataSet.getRandomIndexes();
     }
 
 
 
-    public void bench(){
-        System.out.println("==== BENCHMARK ====");
-        System.out.println("data set size = "+dataSet.length);
-        if(dataSet.length <= 10){
-            System.out.println(Arrays.toString(dataSet));
-        }
+    public void startBench(){
+        System.out.println("==== MY COLLECTION BENCHMARK ====");
+        System.out.println("data set size = "+dSet.getSize());
 
 
-        System.out.println("-- add test --");
-        System.out.println("test "+linkedList.getClass());
-        start();
-        for(int i = 0; i < dataSet.length; i++){
-            linkedList.add(dataSet[i]);
-        }
-        finish();
+        ListBenchmark listBenchmark = new ListBenchmark(dSet,linkedList);
+        listBenchmark.startBench();
 
-
-        System.out.println("test "+myLinkedList.getClass());
-        start();
-        for(int i = 0; i < dataSet.length; i++){
-            myLinkedList.add(dataSet[i]);
-        }
-        finish();
+        bench(dSet.getData(),dSet.getSize(),(int x)->myLinkedList.add(x),"sequential add");
+        bench(dSet.getIndexes(),dSet.getSize()/100,(int x)->myLinkedList.add(x,0),"random add");
+        bench(dSet.getIndexes(),dSet.getSize()/100,(int x)->myLinkedList.set(x,0),"random set");
+        bench(dSet.getIndexes(),dSet.getSize()/100,(int x)->myLinkedList.remove(x),"random remove");
         System.out.println();
-
-
-        System.out.println("-- random add test --");
-
-        System.out.println("test "+linkedList.getClass());
-        start();
-        for(int i = 0; i < indexes.length / 100; i++){
-            linkedList.add(indexes[i],dataSet[i]);
-        }
-        finish();
-
-
-        System.out.println("test "+myLinkedList.getClass());
-        start();
-        for(int i = 0; i < indexes.length / 100; i++){
-            myLinkedList.add(indexes[i],dataSet[i]);
-        }
-        finish();
-        System.out.println();
-
-
-
-        System.out.println("-- get test --");
-
-        System.out.println("test "+linkedList.getClass());
-        start();
-        for(int i = 0; i < indexes.length / 100; i++){
-            linkedList.get(i);
-        }
-        finish();
-
-
-        System.out.println("test "+myLinkedList.getClass());
-        start();
-        for(int i = 0; i < indexes.length / 100; i++){
-            myLinkedList.get(i);
-        }
-        finish();
-        System.out.println();
-
-
-
-        System.out.println("-- remove test -- ");
-
-        System.out.println("test "+linkedList.getClass());
-        start();
-        start = System.nanoTime();
-        for(int i = 0; i < indexes.length / 100; i++){
-            linkedList.remove(indexes[i]);
-        }
-        finish();
-
-
-
-        System.out.println("test "+myLinkedList.getClass());
-        start();
-        for(int i = 0; i < indexes.length / 100; i++){
-            myLinkedList.remove(indexes[i]);
-        }
-        finish();
 
 
 
         checkCollections();
+    }
+
+    private void bench(int[] data, int size, Action action, String actionName){
+        start();
+        for (int i = 0;i < size; i++){
+            action.doAction(data[i]);
+        }
+        finish(myLinkedList.getClass().getName(),actionName);
     }
 
     private void checkCollections(){
@@ -138,15 +67,4 @@ public class MyListBenchmark {
             }
         }
     }
-
-    private void start(){
-        start = System.nanoTime();
-    }
-
-    private void finish(){
-        finish = System.nanoTime();
-        System.out.println("time = "+((finish - start) / 1_000_000)   + " ms");
-        start = finish = 0l;
-    }
-
 }

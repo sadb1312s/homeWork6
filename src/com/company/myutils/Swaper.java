@@ -1,7 +1,6 @@
 package com.company.myutils;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.RandomAccess;
 
 public class Swaper {

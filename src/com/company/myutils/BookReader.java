@@ -5,12 +5,10 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class BookReader {
-    private String path;
     private File file;
 
     public BookReader(String path) {
-        this.path = path;
-        this.file = new File(this.path);
+        this.file = new File(path);
     }
 
     //ex7

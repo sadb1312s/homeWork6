@@ -1,7 +1,5 @@
 package com.company.mycollections;
 
-import java.util.LinkedList;
-
 public interface ILinkedList<E> extends Iterable<E> {
     void add(E element);
     void add(int index, E element);
